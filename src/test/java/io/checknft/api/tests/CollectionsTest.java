@@ -13,6 +13,7 @@ public class CollectionsTest extends BaseTest {
         int limit = 20;
         RestAssured.given()
                 .header("X-API-KEY", TOKEN)
+                .header("accept", "*/*")
                 .param("limit", limit)
                 .when()
                 .get("/api/public/v1/collection")
@@ -27,6 +28,7 @@ public class CollectionsTest extends BaseTest {
         int limit = 20;
         RestAssured.given()
                 .header("X-API-KEY", TOKEN)
+                .header("accept", "*/*")
                 .pathParam("address", address)
                 .param("limit", limit)
                 .when()
@@ -40,8 +42,9 @@ public class CollectionsTest extends BaseTest {
     public void getCollectionsStatistic() {
         String address = "0x60E4d786628Fea6478F785A6d7e704777c86a7c6";
         RestAssured.given()
-                .pathParam("address", address)
                 .header("X-API-KEY", TOKEN)
+                .header("accept", "*/*")
+                .pathParam("address", address)
                 .when()
                 .get("/api/public/v1/collection/contract/{address}/statistic")
                 .then()
@@ -57,6 +60,7 @@ public class CollectionsTest extends BaseTest {
         String unbound = Unbound.FALSE;
         RestAssured.given()
                 .header("X-API-KEY", TOKEN)
+                .header("accept", "*/*")
                 .pathParam("id", id)
                 .param("period", period)
                 .param("date", date)
@@ -76,6 +80,7 @@ public class CollectionsTest extends BaseTest {
         String unbound = Unbound.FALSE;
         RestAssured.given()
                 .header("X-API-KEY", TOKEN)
+                .header("accept", "*/*")
                 .pathParam("id", id)
                 .param("period", period)
                 .param("date", date)

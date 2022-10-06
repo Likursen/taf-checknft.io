@@ -10,6 +10,7 @@ public class EventsTest extends BaseTest {
         int limit = 20;
         RestAssured.given()
                 .header("X-API-KEY", TOKEN)
+                .header("accept", "*/*")
                 .param("limit", limit)
                 .when()
                 .get("/api/public/v1/event")
@@ -24,6 +25,7 @@ public class EventsTest extends BaseTest {
         int limit = 20;
         RestAssured.given()
                 .header("X-API-KEY", TOKEN)
+                .header("accept", "*/*")
                 .pathParam("address", address)
                 .param("limit", limit)
                 .when()
@@ -39,6 +41,7 @@ public class EventsTest extends BaseTest {
         int limit = 20;
         RestAssured.given()
                 .header("X-API-KEY", TOKEN)
+                .header("accept", "*/*")
                 .pathParam("address", address)
                 .param("limit", limit)
                 .when()
@@ -55,6 +58,7 @@ public class EventsTest extends BaseTest {
         int limit = 20;
         RestAssured.given()
                 .header("X-API-KEY", TOKEN)
+                .header("accept", "*/*")
                 .pathParam("tokenId", tokenId)
                 .pathParam("address", address)
                 .param("limit", limit)

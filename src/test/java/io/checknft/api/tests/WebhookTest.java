@@ -13,6 +13,8 @@ public class WebhookTest extends BaseTest {
         body.put("endpoint", "endpoint");
         RestAssured.given()
                 .header("X-API-KEY", TOKEN)
+                .header("accept", "*/*")
+                .header("Content-Type", "application/json")
                 .body(body.toString())
                 .when()
                 .post("/api/public/v1/token/account/amount")

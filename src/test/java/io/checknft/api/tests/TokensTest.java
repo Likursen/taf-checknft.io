@@ -13,6 +13,7 @@ public class TokensTest extends BaseTest {
         int limit = 20;
         RestAssured.given()
                 .header("X-API-KEY", TOKEN)
+                .header("accept", "*/*")
                 .param("limit", limit)
                 .when()
                 .get("/api/public/v1/token")
@@ -27,6 +28,7 @@ public class TokensTest extends BaseTest {
         int limit = 20;
         RestAssured.given()
                 .header("X-API-KEY", TOKEN)
+                .header("accept", "*/*")
                 .pathParam("address", address)
                 .param("limit", limit)
                 .when()
@@ -42,6 +44,7 @@ public class TokensTest extends BaseTest {
         int limit = 20;
         RestAssured.given()
                 .header("X-API-KEY", TOKEN)
+                .header("accept", "*/*")
                 .pathParam("address", address)
                 .param("limit", limit)
                 .when()
@@ -57,6 +60,7 @@ public class TokensTest extends BaseTest {
         String tokenId = "1";
         RestAssured.given()
                 .header("X-API-KEY", TOKEN)
+                .header("accept", "*/*")
                 .pathParam("tokenId", tokenId)
                 .pathParam("address", address)
                 .when()
@@ -74,6 +78,8 @@ public class TokensTest extends BaseTest {
         body.put("addresses", addresses);
         RestAssured.given()
                 .header("X-API-KEY", TOKEN)
+                .header("accept", "*/*")
+                .header("Content-Type", "application/json")
                 .body(body.toString())
                 .when()
                 .post("/api/public/v1/token/account/amount")
@@ -88,6 +94,7 @@ public class TokensTest extends BaseTest {
         String tokenId = "1";
         RestAssured.given()
                 .header("X-API-KEY", TOKEN)
+                .header("accept", "*/*")
                 .pathParam("tokenId", tokenId)
                 .param("period", period)
                 .when()
