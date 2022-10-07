@@ -6,8 +6,8 @@ import io.restassured.RestAssured;
 import org.testng.annotations.BeforeMethod;
 
 public abstract class BaseTest {
-    private static final Property properties = PropertiesLoader.getProperties();
-    protected final static String TOKEN = properties.token();
+    private static final Property PROPERTIES = PropertiesLoader.getProperties();
+    protected final static String TOKEN = PROPERTIES.token();
 
     @BeforeMethod
     public void beforeMethod() {

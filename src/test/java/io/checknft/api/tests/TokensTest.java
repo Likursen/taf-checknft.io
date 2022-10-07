@@ -1,17 +1,22 @@
 package io.checknft.api.tests;
 
+import io.checknft.api.pojo.tokenPojo.TokenPeriodStatisticPojo;
+import io.checknft.api.pojo.tokenPojo.TokensListByContractAddressAndTokenId;
+import io.checknft.api.pojo.tokenPojo.TokensListPojo;
 import io.checknft.api.utils.Period;
 import io.restassured.RestAssured;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.testng.annotations.Test;
 
+import java.util.List;
+
 public class TokensTest extends BaseTest {
 
     @Test(description = "Get the list of NFTs")
     public void getNftList() {
         int limit = 20;
-        RestAssured.given()
+        TokensListPojo responseObject = RestAssured.given()
                 .header("X-API-KEY", TOKEN)
                 .header("accept", "*/*")
                 .param("limit", limit)
@@ -19,14 +24,16 @@ public class TokensTest extends BaseTest {
                 .get("/api/public/v1/token")
                 .then()
                 .assertThat()
-                .statusCode(200);
+                .statusCode(200)
+                .extract()
+                .as(TokensListPojo.class);
     }
 
     @Test(description = "Get the list of NFTs owned by an account address")
     public void getNftListByAccountAddress() {
         String address = "0x465092bBE4ca9675C1Cf9c7BF2620b2eefC77E25";
         int limit = 20;
-        RestAssured.given()
+        TokensListPojo responseObject = RestAssured.given()
                 .header("X-API-KEY", TOKEN)
                 .header("accept", "*/*")
                 .pathParam("address", address)
@@ -35,14 +42,16 @@ public class TokensTest extends BaseTest {
                 .get("/api/public/v1/token/owner/{address}")
                 .then()
                 .assertThat()
-                .statusCode(200);
+                .statusCode(200)
+                .extract()
+                .as(TokensListPojo.class);
     }
 
     @Test(description = "Get the list of NFTs that belong to a contract address")
     public void getNftListByContractAddress() {
         String address = "0x60E4d786628Fea6478F785A6d7e704777c86a7c6";
         int limit = 20;
-        RestAssured.given()
+        TokensListPojo responseObject = RestAssured.given()
                 .header("X-API-KEY", TOKEN)
                 .header("accept", "*/*")
                 .pathParam("address", address)
@@ -51,14 +60,16 @@ public class TokensTest extends BaseTest {
                 .get("/api/public/v1/token/contract/{address}")
                 .then()
                 .assertThat()
-                .statusCode(200);
+                .statusCode(200)
+                .extract()
+                .as(TokensListPojo.class);
     }
 
     @Test(description = "Get the NFT that belongs to a contract address and has token id")
     public void getNftListByContractAddressAndTokenId() {
         String address = "0x60E4d786628Fea6478F785A6d7e704777c86a7c6";
         String tokenId = "1";
-        RestAssured.given()
+        TokensListByContractAddressAndTokenId responseObject = RestAssured.given()
                 .header("X-API-KEY", TOKEN)
                 .header("accept", "*/*")
                 .pathParam("tokenId", tokenId)
@@ -67,7 +78,9 @@ public class TokensTest extends BaseTest {
                 .get("/api/public/v1/token/contract/{address}/{tokenId}")
                 .then()
                 .assertThat()
-                .statusCode(200);
+                .statusCode(200)
+                .extract()
+                .as(TokensListByContractAddressAndTokenId.class);
     }
 
     @Test(description = "Get the NFT amount owned by an account address")
@@ -92,7 +105,7 @@ public class TokensTest extends BaseTest {
     public void getNftStatisticForPeriod() {
         String period = Period.Nft.YEAR;
         String tokenId = "1";
-        RestAssured.given()
+        List<TokenPeriodStatisticPojo> responseObjectList = RestAssured.given()
                 .header("X-API-KEY", TOKEN)
                 .header("accept", "*/*")
                 .pathParam("tokenId", tokenId)
@@ -101,6 +114,10 @@ public class TokensTest extends BaseTest {
                 .get("api/public/v1/token/{tokenId}/price")
                 .then()
                 .assertThat()
-                .statusCode(200);
+                .statusCode(200)
+                .extract()
+                .jsonPath()
+                .getList("");
+        System.out.println(responseObjectList);
     }
 }

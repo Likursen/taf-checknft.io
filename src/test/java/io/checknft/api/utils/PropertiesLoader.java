@@ -11,10 +11,10 @@ import java.util.Properties;
 
 public class PropertiesLoader {
     private static final File FILE = new File("src/test/resources/credentials.properties");
-    private static final Property properties = ConfigFactory.create(Property.class, loadProperties());
+    private static final Property PROPERTIES = ConfigFactory.create(Property.class, loadProperties());
 
     public static Property getProperties() {
-        return properties;
+        return PROPERTIES;
     }
 
     private static Properties loadProperties() {
